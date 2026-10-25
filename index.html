@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Recta final 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: diapositiva 16:9 oscura. Header con anillo de cuenta regresiva, bento de 4 bloques (3 pasos + gráfica en paralelo), franja temporal a escala con hitos. */
+:root{
+  --bg:#0A0D14; --bg2:#10141D;
+  --surface:rgba(255,255,255,.035); --surface2:rgba(255,255,255,.06);
+  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
+  --fg:#EEF1F6; --fg2:#A9B2C3; --fg3:#6C7689;
+  --orange:#FF8A3D; --teal:#5DCAA5; --blue:#7AA7FF; --pink:#FF6FA8;
+  --f-display:'Bricolage Grotesque','DM Sans',system-ui,sans-serif;
+  --f-sans:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'DM Mono',ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-sans);display:grid;place-items:center;padding-block:16px;padding-inline:16px;overflow-x:hidden}
+.stage{position:relative;width:min(100%, calc((100dvh - 32px) * 16 / 9));aspect-ratio:16/9;max-width:100%;overflow:hidden;border-radius:22px}
+.slide{position:absolute;top:0;left:0;width:1280px;height:720px;transform-origin:0 0;transform:scale(var(--s,1));
+  background:var(--bg);border:1px solid var(--line);border-radius:22px;overflow:hidden;isolation:isolate}
+/* atmósfera */
+.glow{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;z-index:-1}
+.g1{width:520px;height:520px;left:-160px;top:-220px;background:var(--blue);animation:drift 14s ease-in-out infinite alternate}
+.g2{width:460px;height:460px;right:-140px;top:120px;background:var(--pink);opacity:.18;animation:drift 18s ease-in-out infinite alternate-reverse}
+.g3{width:520px;height:300px;left:420px;bottom:-240px;background:var(--orange);opacity:.2;animation:drift 16s ease-in-out infinite alternate}
+.grid{position:absolute;inset:0;z-index:-1;opacity:.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:48px 48px;mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%)}
+@keyframes drift{to{transform:translate(60px,40px) scale(1.1)}}
+.abs{position:absolute}
+
+/* ── Header ── */
+.eyebrow{left:48px;top:36px;display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg2)}
+.tag{padding:4px 10px;border:1px solid var(--line2);border-radius:999px;color:var(--fg);background:var(--surface2)}
+h1{left:48px;top:64px;font-family:var(--f-display);font-weight:800;font-size:48px;line-height:.98;letter-spacing:-.035em;text-wrap:balance}
+h1 .grad{background:linear-gradient(90deg,var(--teal),var(--blue) 45%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.count{right:48px;top:36px;display:flex;align-items:center;gap:16px;padding:12px 20px 12px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);backdrop-filter:blur(12px)}
+.ring{position:relative;width:92px;height:92px}
+.ring svg{width:92px;height:92px;transform:rotate(-90deg)}
+.ring-n{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:34px;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.count-t{font-size:14px;line-height:1.4;color:var(--fg2)}
+.count-t b{display:block;font-family:var(--f-display);font-weight:700;font-size:20px;color:var(--fg);letter-spacing:-.01em}
+.count-t span{font-family:var(--f-mono);font-size:12px;color:var(--orange)}
+.count-t span.cs{font-family:var(--f-sans);font-size:14px;color:var(--fg2)}
+.expo .count-t span:not(.cs){color:var(--pink)}
+
+/* ── Bento ── */
+.card{top:192px;height:328px;width:281px;padding:20px 22px;border-radius:20px;background:var(--surface);border:1px solid var(--line);backdrop-filter:blur(14px);display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.c1{left:48px;--c:var(--orange)} .c2{left:349px;--c:var(--teal)} .c3{left:650px;--c:var(--blue)} .c4{left:951px;--c:var(--pink)}
+.c4{border-style:dashed;border-color:rgba(255,111,168,.35)}
+.k{display:flex;align-items:center;justify-content:space-between;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--c)}
+.k em{font-style:normal;color:var(--fg3)}
+.h{font-family:var(--f-display);font-weight:700;font-size:20px;line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+.p{font-size:12.5px;line-height:1.5;color:var(--fg2)}
+.vis{margin-top:auto}
+
+/* Materiales */
+.check{display:flex;flex-direction:column;gap:4px}
+.row{display:flex;align-items:center;gap:9px;font-size:12px;line-height:1.2;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:4px 9px;border-radius:10px;background:var(--surface2)}
+.box{flex:none;width:18px;height:18px;border-radius:6px;border:1.5px solid var(--line2);display:grid;place-items:center;position:relative}
+.box svg{width:11px;height:11px;opacity:1}
+.box::before{content:'';position:absolute;inset:-1.5px;border-radius:6px;background:var(--orange);z-index:-1}
+.box{isolation:isolate}
+
+/* Testing */
+.days{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.day{position:relative;height:34px;border-radius:10px;display:grid;place-items:center;font-family:var(--f-mono);font-size:12px;
+  background:rgba(93,202,165,.16);color:var(--teal);border:1px solid rgba(93,202,165,.4)}
+.day.plus{border-style:dashed;background:transparent}
+.fb{position:absolute;top:-7px;right:-5px;width:16px;height:13px;border-radius:5px;background:var(--teal)}
+.fb::after{content:'';position:absolute;left:3px;bottom:-4px;border:4px solid transparent;border-top-color:var(--teal);border-bottom:0}
+.days-l{margin-top:10px;font-family:var(--f-mono);font-size:11.5px;color:var(--fg3)}
+.days-l b{font-weight:500;color:var(--teal)}
+
+/* Adecuaciones */
+.loop{display:flex;align-items:center;gap:14px}
+.loop svg{width:78px;height:78px;flex:none}
+.flow{display:flex;flex-direction:column;gap:6px;font-family:var(--f-mono);font-size:12px;color:var(--fg2)}
+.flow span{display:flex;align-items:center;gap:8px}
+.flow i{width:7px;height:7px;border-radius:50%;background:var(--blue)}
+
+/* Gráfica */
+.gfx{display:flex;gap:14px;align-items:flex-end}
+.rollup{position:relative;width:62px;height:112px;flex:none}
+.rollup .sheet{position:absolute;left:4px;right:4px;top:0;bottom:8px;border-radius:4px;overflow:hidden;
+  background:linear-gradient(170deg,var(--pink),#7B5CFF 60%,var(--blue));transform-origin:bottom}
+.rollup .sheet::before{content:'';position:absolute;left:50%;top:14px;width:22px;height:22px;margin-left:-11px;border-radius:50%;border:3px solid rgba(255,255,255,.9)}
+.rollup .sheet::after{content:'';position:absolute;left:10px;right:10px;top:48px;height:28px;background:repeating-linear-gradient(rgba(255,255,255,.8) 0 3px,transparent 3px 8px)}
+.rollup .base{position:absolute;left:0;right:0;bottom:0;height:9px;border-radius:3px;background:var(--fg3)}
+.chips{display:flex;flex-direction:column;gap:6px}
+.chip{font-family:var(--f-mono);font-size:11.5px;padding:5px 10px;border-radius:999px;border:1px solid rgba(255,111,168,.4);color:var(--fg);background:rgba(255,111,168,.08);white-space:nowrap}
+
+/* ── Timeline ── */
+.axis{left:48px;top:648px;width:1184px;height:2px;background:var(--line2);transform-origin:left}
+.bar{top:645px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--teal),var(--blue),var(--orange));box-shadow:0 0 18px rgba(255,138,61,.45);transform-origin:left}
+.tick{top:660px;font-family:var(--f-mono);font-size:11px;color:var(--fg3);transform:translateX(-50%);white-space:nowrap}
+.tick::before{content:'';position:absolute;left:50%;top:-10px;width:1px;height:6px;background:var(--fg3)}
+.hoy{top:638px;transform:translateX(-50%)}
+.hoy-dot{width:22px;height:22px;border-radius:50%;background:var(--fg);border:5px solid var(--bg);box-shadow:0 0 0 0 rgba(238,241,246,.5);animation:pulse 1.8s ease-out 2s infinite}
+.hoy-l{position:absolute;left:0;top:-20px;transform:translateX(-50%);font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--fg);white-space:nowrap}
+.band{top:642px;height:14px;border-radius:7px;transform-origin:left}
+.bB{background:var(--teal);box-shadow:0 0 16px rgba(93,202,165,.6)}
+.bC{background:var(--pink);box-shadow:0 0 16px rgba(255,111,168,.6)}
+.dl{top:556px;width:2px;height:92px;background:linear-gradient(var(--orange),transparent);transform-origin:bottom}
+.dl::before{content:'';position:absolute;left:-5px;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--orange);box-shadow:0 0 14px var(--orange)}
+.ms{top:548px;display:flex;flex-direction:column;gap:3px}
+.ms-d{font-family:var(--f-mono);font-size:11.5px;color:var(--c);display:flex;align-items:center;gap:7px}
+.ms-h{font-family:var(--f-display);font-weight:700;font-size:15px;letter-spacing:-.01em;line-height:1.15}
+.ms-s{font-family:var(--f-mono);font-size:10.5px;color:var(--fg3)}
+.mA{left:560px;width:200px;text-align:right;align-items:flex-end;--c:var(--orange)}
+.mB{left:808px;width:236px;--c:var(--teal)}
+.mC{left:1062px;width:170px;text-align:right;align-items:flex-end;--c:var(--pink)}
+.mB .ms-h{max-width:236px}
+.live{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:blink 1.3s ease-in-out infinite}
+.stick{top:620px;width:1px;height:22px;background:var(--line2)}
+.stickC{top:606px;height:36px}
+
+.foot{left:48px;bottom:16px;font-family:var(--f-mono);font-size:11px;color:var(--fg3)}
+.replay{left:50%;transform:translateX(-50%);bottom:12px;font-family:var(--f-mono);font-size:11.5px;padding:6px 12px;border-radius:999px;border:1px solid var(--line2);background:var(--surface2);color:var(--fg2);cursor:pointer;transition:all .2s}
+.replay:hover{color:var(--fg);border-color:var(--fg3)}
+.mhead{display:none}
+.replay:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* ── Motion ── */
+@keyframes up{from{opacity:0;transform:translateY(22px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes growX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes growY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes pop{0%{opacity:0;transform:scale(.3)}70%{opacity:1;transform:scale(1.15)}100%{opacity:1;transform:none}}
+@keyframes boxOn{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+@keyframes dayOn{from{background:transparent;border-color:var(--line2);color:var(--fg3)}to{}}
+@keyframes hoyIn{from{opacity:0;transform:translate(-50%,-24px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(238,241,246,.5)}100%{box-shadow:0 0 0 16px rgba(238,241,246,0)}}
+@keyframes blink{50%{opacity:.2}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes ring{from{stroke-dashoffset:var(--circ)}}
+
+.play .a{animation:var(--k,up) var(--t,.7s) var(--ease) var(--d,0s) both}
+.play .axis{--k:growX;--t:1s}
+.play .bar{--k:growX;--t:1.4s}
+.play .band{--k:growX;--t:.6s}
+.play .dl{--k:growY;--t:.6s}
+.play .tick,.play .stick{--k:fade}
+.play .hoy{--k:hoyIn}
+.play .fb,.play .day.plus{--k:pop;--t:.45s}
+.play .row .box::before{animation:boxOn .35s var(--ease) var(--d) both}
+.play .row .box svg{animation:fade .2s ease var(--d) both}
+.play .day:not(.plus){animation:dayOn .35s ease var(--d) both}
+.play .sheet{--k:growY;--t:.9s}
+.play .loop .arrows{transform-origin:39px 39px;animation:spin 2.4s var(--ease) 5.9s 1 both,spin 6s linear 8.3s infinite}
+.play .day.plus{animation:pop .45s var(--ease) 4.8s both,iter 1.6s ease-in-out 5.4s infinite}
+@keyframes iter{50%{background:rgba(93,202,165,.18);box-shadow:0 0 14px rgba(93,202,165,.45)}}
+.play .ring .prog{animation:ring 1.4s var(--ease) 7s both}
+
+/* ── Mobile / pantallas angostas: se apila en una columna legible ── */
+@media (max-width:900px){
+  body{display:block}
+  .stage{width:100%;aspect-ratio:auto}
+  .slide{position:relative;width:100%;height:auto;transform:none!important;padding:24px 18px 20px;display:flex;flex-direction:column;gap:14px;border-radius:18px}
+  .slide .abs{position:static;width:auto;left:auto;right:auto;top:auto;bottom:auto}
+  .eyebrow{flex-wrap:wrap;font-size:11px}
+  h1{font-size:clamp(32px,9vw,46px)}
+  .count{align-self:flex-start;padding:8px 16px 8px 8px}
+  .ring,.ring svg{width:72px;height:72px}
+  .ring-n{font-size:26px}
+  .card{height:auto;min-width:0}
+  .row{white-space:normal}
+  .axis,.bar,.band,.dl,.hoy,.stick,#ticks{display:none}
+  .mhead{display:block;margin-top:6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3)}
+  .ms,.mA,.mC{text-align:left;align-items:flex-start;padding:14px 16px;border-radius:16px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--c)}
+  .mB .ms-h{max-width:none}
+  .foot{order:20;text-align:center}
+  .replay{order:21;align-self:center;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .play .a,.play .day,.play .box::before,.play .box svg,.play .loop .arrows,.play .ring .prog,.glow,.hoy-dot,.live{animation:none!important}
+}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+<div class="slide play" id="slide" role="img" aria-label="Última etapa del roadmap: materiales de la 3ra presentación, testing con el usuario más de 7 días seguidos, adecuaciones y gráfica para la Expo, con fecha límite el 01/11, presentaciones finales con el usuario del 2 al 6/11 y Expo la semana del 16/11.">
+  <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div><div class="grid"></div>
+
+  <div class="abs eyebrow a" style="--d:0s"><span class="tag">E06</span> Evaluación de Proyectos · Última etapa del roadmap</div>
+  <h1 class="abs a" style="--d:.15s">Recta final:<br><span class="grad">del testing a la Expo.</span></h1>
+
+  <div class="abs count a" style="--d:6.8s">
+    <div class="ring">
+      <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="7"/>
+        <circle class="prog" id="prog" cx="46" cy="46" r="38" fill="none" stroke="#FF8A3D" stroke-width="7" stroke-linecap="round"/></svg>
+      <div class="ring-n" id="countN">0</div>
+    </div>
+    <div class="count-t"><b id="cT">días para terminar</b><span class="cs" id="cS">el proyecto completo</span><br><span id="cL">límite · 01/11</span></div>
+  </div>
+
+  <!-- Bento -->
+  <section class="abs card c1 a" style="--d:1.6s">
+    <div class="k">01 · Materiales <em>3ra presentación</em></div>
+    <div class="h">Completar lo pendiente</div>
+    <p class="p">Lo que falta del Linktree de la 3ra presentación.</p>
+    <div class="vis check" id="checklist"></div>
+  </section>
+
+  <section class="abs card c2 a" style="--d:2.9s">
+    <div class="k">02 · Testing <em>con el cliente</em></div>
+    <div class="h">Probar e iterar</div>
+    <p class="p">Más de 7 días seguidos con el cliente, mejorando con cada feedback.</p>
+    <div class="vis" aria-hidden="true">
+      <div class="days">
+        <div class="day" style="--d:3.3s">D1</div>
+        <div class="day" style="--d:3.5s">D2<span class="fb a" style="--d:3.7s"></span></div>
+        <div class="day" style="--d:3.7s">D3</div>
+        <div class="day" style="--d:3.9s">D4<span class="fb a" style="--d:4.1s"></span></div>
+        <div class="day" style="--d:4.1s">D5</div>
+        <div class="day" style="--d:4.3s">D6</div>
+        <div class="day" style="--d:4.5s">D7<span class="fb a" style="--d:4.7s"></span></div>
+        <div class="day plus a" style="--d:4.8s">D8+</div>
+      </div>
+      <div class="days-l a" style="--d:5s"><b>7 días es el mínimo</b> · se sigue iterando</div>
+    </div>
+  </section>
+
+  <section class="abs card c3 a" style="--d:5.3s">
+    <div class="k">03 · Ajustes <em>según feedback</em></div>
+    <div class="h">Adecuaciones</div>
+    <p class="p">Cada feedback del cliente vuelve como mejora, en ciclo hasta el 01/11.</p>
+    <div class="vis loop" aria-hidden="true">
+      <svg viewBox="0 0 78 78">
+        <circle cx="39" cy="39" r="28" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="6"/>
+        <g class="arrows">
+          <g fill="none" stroke="#7AA7FF" stroke-width="6" stroke-linecap="round">
+            <path d="M39 11a28 28 0 0 1 26 18"/><path d="M65 49a28 28 0 0 1-26 18"/><path d="M16 55A28 28 0 0 1 14 25"/>
+          </g>
+          <g fill="#7AA7FF"><path d="M69 24l-2 11-8-7z"/><path d="M33 72l5-10 5 9z"/><path d="M9 21l10 0-7 8z"/></g>
+        </g>
+      </svg>
+      <div class="flow"><span><i></i>feedback</span><span><i></i>ajuste</span><span><i></i>nuevo test</span></div>
+    </div>
+  </section>
+
+  <section class="abs card c4 a" style="--d:6s">
+    <div class="k">04 · Gráfica <em>en paralelo</em></div>
+    <div class="h">Pieza visual para la Expo</div>
+    <p class="p">Identidad del proyecto lista para la exposición pública.</p>
+    <div class="vis gfx" aria-hidden="true">
+      <div class="rollup"><div class="sheet a" style="--d:6.3s"></div><div class="base"></div></div>
+      <div class="chips">
+        <span class="chip a" style="--d:6.5s">Banner roll-up</span>
+        <span class="chip a" style="--d:6.65s">Logo / isotipo</span>
+        <span class="chip a" style="--d:6.8s">Tríptico o póster</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <div class="abs axis a" style="--d:.5s"></div>
+  <div id="ticks"></div>
+  <div class="abs bar a" id="bar" style="--d:6.9s"></div>
+  <div class="abs band bB a" data-x="2026-11-02" data-w="2026-11-07" style="--d:8.2s"></div>
+  <div class="abs band bC a" data-x="2026-11-16" data-w="2026-11-21" style="--d:9s"></div>
+  <div class="abs dl a" data-x="2026-11-01" style="--d:7.9s"></div>
+  <div class="abs hoy a" id="hoy" style="--d:1.1s"><div class="hoy-dot"></div><div class="hoy-l" id="hoyL">HOY</div></div>
+
+  <div class="abs stick a" data-x="2026-11-02" style="--d:8.3s"></div>
+  <div class="abs stick stickC a" data-x="2026-11-21" style="--d:9.1s"></div>
+
+  <div class="mhead">Fechas clave</div>
+  <div class="abs ms mA a" style="--d:8s">
+    <div class="ms-d">01/11 · fecha límite</div>
+    <div class="ms-h">Proyecto terminado</div>
+  </div>
+  <div class="abs ms mB a" style="--d:8.4s">
+    <div class="ms-d"><span class="live"></span>Semana del 2 al 6/11</div>
+    <div class="ms-h">Presentaciones finales con el usuario en vivo</div>
+    <div class="ms-s">fechas exactas a confirmar</div>
+  </div>
+  <div class="abs ms mC a" style="--d:9.2s">
+    <div class="ms-d">Semana del 16/11</div>
+    <div class="ms-h">Expo</div>
+    <div class="ms-s">día a confirmar</div>
+  </div>
+
+  <div class="abs foot">7mo año · Prof. Pedaci, Lourdes</div>
+  <button class="abs replay" id="replay" type="button" aria-label="Repetir animación (tecla R)">↻ repetir</button>
+</div>
+</div>
+
+<script>
+(function(){
+  // Materiales de la 3ra presentación (editar esta lista)
+  const MATERIALES=['Host online funcional','GitHub','Documentación web','Manual + Quick Start Guide','FAQ','Landing page'];
+
+  const DAY=86400000, X0=48, W=1184;
+  const start=new Date(2026,8,29), end=new Date(2026,10,22), deadline=new Date(2026,10,1);
+  const ppd=W/((end-start)/DAY);
+  const parse=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+  const x=d=>X0+((d-start)/DAY)*ppd;
+  const slide=document.getElementById('slide'), stage=document.getElementById('stage');
+
+  const cl=document.getElementById('checklist');
+  const tickSvg='<svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="#0A0D14" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  MATERIALES.forEach((m,i)=>{
+    const d=(2.1+i*.18).toFixed(2);
+    cl.insertAdjacentHTML('beforeend',`<div class="row a" style="--d:${(1.8+i*.06).toFixed(2)}s"><span class="box" style="--d:${d}s">${tickSvg}</span>${m}</div>`);
+  });
+
+  document.querySelectorAll('[data-x]').forEach(el=>{
+    const a=x(parse(el.dataset.x)); el.style.left=a+'px';
+    if(el.dataset.w) el.style.width=(x(parse(el.dataset.w))-a)+'px';
+  });
+  [['2026-10-01','1 oct'],['2026-10-15','15 oct'],['2026-11-01','1 nov']].forEach(([d,l],i)=>{
+    document.getElementById('ticks').insertAdjacentHTML('beforeend',`<div class="abs tick a" style="left:${x(parse(d))}px;--d:${.9+i*.1}s">${l}</div>`);
+  });
+
+  const now=new Date(), today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const hx=x(Math.min(Math.max(today,start),end));
+  document.getElementById('hoy').style.left=hx+'px';
+  document.getElementById('hoyL').textContent='HOY '+String(today.getDate()).padStart(2,'0')+'/'+String(today.getMonth()+1).padStart(2,'0');
+  // Objetivo del contador: hasta el 01/11 cuenta al cierre; después, a la Expo (semana del 16/11)
+  const expo=new Date(2026,10,16);
+  const expoMode=today>deadline;
+  const target=expoMode?expo:deadline;
+  const from=expoMode?deadline:start;
+  if(expoMode){
+    slide.classList.add('expo');
+    document.getElementById('cT').textContent=today>=expo?'semana de la Expo':'días para la Expo';
+    document.getElementById('cS').textContent=today>=expo?'¡a presentar!':'presentación final';
+    document.getElementById('cL').textContent='semana del 16/11';
+    document.getElementById('prog').setAttribute('stroke','#FF6FA8');
+  }
+  const bar=document.getElementById('bar'); bar.style.left=hx+'px'; bar.style.width=Math.max(0,x(target)-hx)+'px';
+
+  const days=Math.max(0,Math.round((target-today)/DAY));
+  const total=Math.round((target-from)/DAY);
+  const circ=2*Math.PI*38, prog=document.getElementById('prog');
+  prog.style.strokeDasharray=circ; prog.style.setProperty('--circ',circ);
+  prog.style.strokeDashoffset=circ*(1-Math.min(1,days/total));
+
+  const countN=document.getElementById('countN');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let timer,raf;
+  function count(){
+    cancelAnimationFrame(raf); clearTimeout(timer);
+    if(reduce){countN.textContent=days;return;}
+    countN.textContent='0';
+    timer=setTimeout(()=>{const t0=performance.now();
+      const st=n=>{const p=Math.min(1,(n-t0)/1400);countN.textContent=Math.round(days*(1-Math.pow(1-p,3)));if(p<1)raf=requestAnimationFrame(st);};
+      raf=requestAnimationFrame(st);},7000);
+  }
+  function play(){slide.classList.remove('play');void slide.offsetWidth;slide.classList.add('play');count();}
+  document.getElementById('replay').addEventListener('click',play);
+  document.addEventListener('keydown',e=>{if(e.key==='r'||e.key==='R')play();});
+  function fit(){slide.style.setProperty('--s',stage.clientWidth/1280);}
+  new ResizeObserver(fit).observe(stage); fit(); count();
+})();
+</script>
+</body>
+</html>
